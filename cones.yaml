@@ -1,0 +1,21 @@
+train: images/train/
+val: images/val/
+test: images/test/
+
+# number of classes
+nc: 10
+
+# class names
+names:
+  [
+    "seg_orange_cone",
+    "unknown_cone",
+    "yellow_cone",
+    "seg_large_orange_cone",
+    "seg_blue_cone",
+    "seg_unknown_cone",
+    "seg_yellow_cone",
+    "blue_cone",
+    "orange_cone",
+    "large_orange_cone",
+  ]
