@@ -18,7 +18,7 @@ Model was made as an exercise in the science club : AGH_RACING
         
 # ⚪STEP 2
   
-  - Move file: 'cones.yaml' to yolov7\data
+  - Move file: 'cones.yaml' to yolov7/data
   - Prepare your dataset. Data is in the Supervisely format originally, but yolov7 requires YOLOv7 PyTorch TXT format.
     
     You can AUTOMATICALLY preprocess data using execute_all.py script in the Repo:
