@@ -32,7 +32,7 @@ Model was made as an exercise in the science club : AGH_RACING
         python3 _3_partition_data.py -i {path_to_your_images_folder} -d {path_to_your_dataset} -a {path_to_your_annotations_folder} -y {path_to_your_yolo_folder}
  #
  
-        The final sample result in your YOLOv7 folder should look like this:
+  The final sample result in your YOLOv7 folder should look like this:
         
               yolov7
               |
