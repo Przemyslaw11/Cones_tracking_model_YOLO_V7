@@ -1,8 +1,8 @@
+from pathlib import Path
+from tqdm import tqdm
+import argparse
 import json
 import os
-from pathlib import Path
-import argparse
-from tqdm import tqdm
 
 
 classIdMapper = {9993505:0,
@@ -16,16 +16,28 @@ classIdMapper = {9993505:0,
                  9993512:8,
                  9993513:9}
 
-def getAnnotationsPaths(dataset_path):
+def getAnnotationsPaths(dataset_path: str) -> list:
+    '''
+    returns a list with annotations paths from the given dataset
+        
+    args:
+         dataset_path: path to dataset
+    '''
     return list(Path(dataset_path).rglob("./*/*.json")) 
 
-def parseAnnotations(dataset_path, annotations_path):
+def parseAnnotations(dataset_path: str, annotations_path: str):
+    '''
+    Makes a directory with transformed annotations
+
+    args:
+        dataset_path: path to dataset
+        annotations_path: path to where save the folder with annotations
+    '''
     try:
-        (os.mkdir(annotations_path))
+        Path(annotations_path).mkdir(parents=True)
     except OSError as error:
         pass
     annPaths = getAnnotationsPaths(dataset_path)
-
     for annPath in tqdm(annPaths):
         with open(annPath, "r", encoding="utf8") as annotation:
             formatedAnnotations = []

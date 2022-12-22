@@ -1,7 +1,4 @@
 import argparse
-# from ._1_parse_annotations import main as m1
-# from ._2_copy_images_to_single_directory import main as m2
-# from ._3_partition_data import main as m3
 import os
 
 def main():

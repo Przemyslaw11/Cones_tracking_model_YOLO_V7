@@ -1,26 +1,41 @@
-import shutil
-import os
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
-import argparse
 from tqdm import tqdm
 import multiprocessing as mp
-from concurrent.futures import ThreadPoolExecutor
-
-def getImagesPaths(dataset_path):
-    return filter(lambda path: os.path.isfile(path), list(Path(dataset_path).rglob("./*[!.json]")))
+import argparse
+import shutil
 
 
-def copy_images(dataset_path, images_path):
+def getImagesPaths(dataset_path: str)->list:
+    '''
+    returns a list with images paths from the given dataset
+
+    args:
+         dataset_path: path to dataset
+
+    '''
+    return filter(lambda path: Path.is_file(path), list(Path(dataset_path).rglob("./*[!.json]")))
+
+
+def copy_images(dataset_path: str, images_path: str):
+    '''
+    copies images to a single folder
+
+    args:
+         dataset_path: path to dataset
+         images_path: path to where save the folder with images
+
+    '''
     try:
-        (os.mkdir(images_path))
+        (Path(images_path).mkdir(parents=True, exist_ok=True))
     except OSError as error:
         pass
 
     images_paths = getImagesPaths(dataset_path)
     with ThreadPoolExecutor(100) as exe:
         for path in tqdm(images_paths):
-            filename = os.path.basename(path)
-            new_path = os.path.join(images_path, f"{filename}")
+            filename = path.name
+            new_path = Path(images_path) / f"{filename}"
             exe.submit(shutil.copy, path, new_path) 
 
 def main():
