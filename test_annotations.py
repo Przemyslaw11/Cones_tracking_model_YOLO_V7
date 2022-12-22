@@ -57,7 +57,9 @@ def plot_bounding_box(image, annotation_list: list, class_id_to_name_mapping: di
 
     transformed_annotations = np.copy(annotations)
 
-    ''' annotations are transformed in a special way to be plotted correctly'''
+
+    # annotations are transformed (on the edges of the image) in a special way to be plotted correctly
+
     transformed_annotations[:,[1,3]] = annotations[:,[1,3]] * w
     transformed_annotations[:,[2,4]] = annotations[:,[2,4]] * h 
     
