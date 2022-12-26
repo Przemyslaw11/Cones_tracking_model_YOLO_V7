@@ -1,10 +1,7 @@
-
-
-
 from concurrent.futures import ThreadPoolExecutor
+import multiprocessing as mp
 from pathlib import Path
 from tqdm import tqdm
-import multiprocessing as mp
 import argparse
 import shutil
 
@@ -32,9 +29,18 @@ def copy_images(dataset_path: str, images_path: str):
 
     image_files_paths = getImagesPaths(dataset_path)
     new_image_files_paths = [Path(images_path) / f"{path.name}" for path in image_files_paths]
-    with ThreadPoolExecutor(100) as executor:
-            executor.map(shutil.copy, image_files_paths, new_image_files_paths)
+    concurrent_copy(image_files_paths, new_image_files_paths)
 
+def concurrent_copy(image_files_paths: list, new_image_files_paths: list):
+    '''
+    uses ThreadPooling to speed up copying images to a single directory
+    args:
+        image_files_paths: current images paths
+        new_image_files_paths: new paths to where save the images
+    '''
+    n_cpus = mp.cpu_count()
+    with ThreadPoolExecutor(n_cpus) as executor:
+        executor.map(shutil.copy, image_files_paths, new_image_files_paths)
 
 def main():
     parser = argparse.ArgumentParser()
