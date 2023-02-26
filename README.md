@@ -1,11 +1,6 @@
 # Cones_tracking_model
 Model was made as a task in the science club : AGH_RACING
 
-# Model's basic documentation:
- - Dataset consists of [?]GB photos of cones in Supervisely format. Training set consists [?]% of all photos and testing set consists [?]% of all photos.
- 
-  ## Model properties:
-  in progress:)
   
   ## Configuration:
   
@@ -21,7 +16,7 @@ Model was made as a task in the science club : AGH_RACING
   - Move file: 'cones.yaml' to yolov7/data
   - Prepare your dataset. Data is in the Supervisely format originally, but yolov7 requires YOLOv7 PyTorch TXT format.
     
-    You can automatically preprocess data using execute_all.py script in the Repo:
+    You can automatically preprocess data using execute_all.py script in the repository:
     
         python execute_all.py -d {path_to_your_dataset} -y {path_to_your_yolo_folder} -i {path_to_your_images_folder} -a {path_to_your_annotations_folder}
      
@@ -101,6 +96,17 @@ Run 'train_command.txt' on your automatically moved and preprocessed dataset or 
         train p6 models
       $ python -m torch.distributed.launch --nproc_per_node 8 --master_port 9527 train_aux.py --workers 8 --device 0,1,2,3,4,5,6,7 --sync-bn --batch-size 128 --data cones.yaml --img 1280 1280 --cfg cfg/training/yolov7-w6.yaml --weights '' --name yolov7-w6 --hyp data/hyp.scratch.p6.yaml
 
+
+# Model's basic documentation:
+ - Dataset consists of 24 GB photos of cones in Supervisely format. Training set consists 80% of all photos and testing set consists 20% of all photos.
+ 
+  ## Model properties:
+  ![Model](model_metrics/F1_curve.png "Model results")
+  ![Model](model_metrics/PR_curve.png "Model results")
+  ![Model](model_metrics/P_curve.png "Model results")
+  ![Model](model_metrics/R_curve.png "Model results")
+  ![Model](model_metrics/results.png "Model results")
+  ![Model](model_metrics/confusion_matrix.png "Model results")
 
  ## Dataset is available under the following link:
  - https://www.fsoco-dataset.com/download
